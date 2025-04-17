@@ -11,10 +11,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white"
         >
           <span className="block mb-2">Dream It.</span>
-          <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-white">
             Do It.
           </span>
         </motion.h1>
@@ -23,7 +23,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl mx-auto px-4"
+          className="text-white text-lg sm:text-xl mb-12 max-w-2xl mx-auto px-4"
         >
           Unleashing athletic potential through innovative Web3 solutions
         </motion.p>

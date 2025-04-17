@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -50,7 +49,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+          <div className="text-xl sm:text-2xl font-bold text-white">
             GIC Sports
           </div>
           
@@ -59,7 +58,7 @@ const Navbar = () => {
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="text-gray-300 hover:text-white capitalize transition-colors text-sm lg:text-base font-medium whitespace-nowrap"
+                className="text-white hover:opacity-80 capitalize transition-colors text-sm lg:text-base font-medium whitespace-nowrap"
               >
                 {section.replace('-', ' ')}
               </button>

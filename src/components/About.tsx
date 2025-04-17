@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
@@ -21,7 +20,7 @@ const About = () => {
           variants={fadeIn}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">About GIC Sports</h2>
+          <h2 className="text-4xl font-bold mb-4 text-white">About GIC Sports</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto"></div>
         </motion.div>
 
@@ -33,7 +32,7 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             variants={fadeIn}
           >
-            <h3 className="text-2xl font-semibold mb-4">Our History</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-white">Our History</h3>
             <p className="text-gray-300 mb-6">
               Founded in 2018, GIC Sports has rapidly grown from a boutique agency to a global powerhouse
               in athlete representation and sports technology. With roots in traditional sports management,
@@ -77,7 +76,7 @@ const About = () => {
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-500/20 mb-4">
                     <Target className="w-8 h-8 text-blue-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Mission</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Mission</h3>
                   <p className="text-gray-300">
                     To empower athletes with innovative tools and representation that maximize their potential
                     both on and off the field, while creating meaningful connections with fans through Web3 technologies.
@@ -100,7 +99,7 @@ const About = () => {
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-purple-500/20 mb-4">
                     <History className="w-8 h-8 text-purple-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Vision</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Vision</h3>
                   <p className="text-gray-300">
                     To pioneer the integration of sports and blockchain technology, creating a decentralized
                     ecosystem where athletes, fans, and stakeholders benefit from transparent, equitable,
@@ -124,7 +123,7 @@ const About = () => {
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-teal-500/20 mb-4">
                     <Trophy className="w-8 h-8 text-teal-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Values</h3>
+                  <h3 className="text-xl font-semibold mb-2 text-white">Values</h3>
                   <p className="text-gray-300">
                     Integrity, innovation, excellence, and athlete empowerment guide everything we do.
                     We believe in responsible disruption, transparent operations, and creating equitable
@@ -144,7 +143,7 @@ const About = () => {
           variants={fadeIn}
           className="text-center mb-12"
         >
-          <h3 className="text-2xl font-semibold mb-4">International Partnerships</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-white">International Partnerships</h3>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto mb-8"></div>
         </motion.div>
         
@@ -162,7 +161,7 @@ const About = () => {
               <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-800 mb-4">
                 <Globe className="w-8 h-8 text-gray-300" />
               </div>
-              <h4 className="text-lg font-medium">{region}</h4>
+              <h4 className="text-lg font-medium text-white">{region}</h4>
               <p className="text-gray-400 text-center">Strategic partnerships across {region}</p>
             </motion.div>
           ))}
