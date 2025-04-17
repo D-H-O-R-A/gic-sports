@@ -13,7 +13,10 @@ const ThreeBackground = () => {
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true,
+      antialias: true 
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -30,16 +33,22 @@ const ThreeBackground = () => {
     fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
       const textGeometry = new TextGeometry('GIC', {
         font: font,
-        size: 5,
-        height: 1,
+        size: 8,
+        height: 2,
         curveSegments: 12,
-        bevelEnabled: false,
+        bevelEnabled: true,
+        bevelThickness: 0.1,
+        bevelSize: 0.05,
+        bevelOffset: 0,
+        bevelSegments: 5
       });
 
       const textMaterial = new THREE.MeshPhongMaterial({
         color: 0x0047AB,
         specular: 0x555555,
         shininess: 30,
+        transparent: true,
+        opacity: 0.8
       });
 
       const textMesh = new THREE.Mesh(textGeometry, textMaterial);
@@ -47,12 +56,13 @@ const ThreeBackground = () => {
       scene.add(textMesh);
 
       // Position camera
-      camera.position.z = 15;
+      camera.position.z = 20;
 
       // Animation
       const animate = () => {
         requestAnimationFrame(animate);
         textMesh.rotation.y += 0.002;
+        textMesh.rotation.x = Math.sin(Date.now() * 0.0005) * 0.1;
         renderer.render(scene, camera);
       };
 
@@ -81,7 +91,7 @@ const ThreeBackground = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-full opacity-20 pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full opacity-10 pointer-events-none z-0"
     />
   );
 };

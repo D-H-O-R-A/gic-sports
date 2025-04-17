@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,20 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const sections = ['home', 'about', 'teams', 'events', 'news', 'contact'];
+  const sections = [
+    'home',
+    'about',
+    'athletes',
+    'young-talents',
+    'scouting',
+    'deals',
+    'news',
+    'web3',
+    'exchange',
+    'roadmap',
+    'whitepaper',
+    'contact'
+  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -26,21 +40,28 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#1A1F2C]/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-black/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+        <div className="flex justify-between items-center h-20">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             GIC Sports
           </div>
           
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6">
             {sections.map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="text-gray-300 hover:text-white capitalize transition-colors"
+                className="text-gray-300 hover:text-white capitalize transition-colors text-sm font-medium"
               >
-                {section}
+                {section.replace('-', ' ')}
               </button>
             ))}
           </div>
@@ -51,25 +72,34 @@ const Navbar = () => {
             className="md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <Menu className="h-6 w-6" />
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6 text-white" />
+            ) : (
+              <Menu className="h-6 w-6 text-white" />
+            )}
           </Button>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 bg-[#1A1F2C]/95 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden py-4 bg-black/95 backdrop-blur-md"
+          >
             {sections.map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white capitalize transition-colors"
+                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 capitalize transition-colors text-sm font-medium"
               >
-                {section}
+                {section.replace('-', ' ')}
               </button>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
