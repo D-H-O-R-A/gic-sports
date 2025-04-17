@@ -1,8 +1,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 const ThreeBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +32,8 @@ const ThreeBackground = () => {
         font: font,
         size: 5,
         height: 1,
+        curveSegments: 12,
+        bevelEnabled: false,
       });
 
       const textMaterial = new THREE.MeshPhongMaterial({
