@@ -2,24 +2,28 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import CardComparison from '@/components/CardComparison';
-import Benefits from '@/components/Benefits';
-import Features from '@/components/Features';
-import ApplicationForm from '@/components/ApplicationForm';
-import Footer from '@/components/Footer';
+import About from '@/components/About';
+import Teams from '@/components/Teams';
+import Events from '@/components/Events';
+import News from '@/components/News';
+import Contact from '@/components/Contact';
+import ThreeBackground from '@/components/ThreeBackground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <CardComparison />
-        <Benefits />
-        <Features />
-        <ApplicationForm />
-      </main>
-      <Footer />
+    <div className="min-h-screen bg-[#1A1F2C] text-white relative">
+      <ThreeBackground />
+      <div className="relative z-10">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Teams />
+          <Events />
+          <News />
+          <Contact />
+        </main>
+      </div>
     </div>
   );
 };
