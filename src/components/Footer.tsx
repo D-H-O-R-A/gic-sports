@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Facebook, Twitter, Instagram, Linkedin, Github, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
@@ -14,7 +13,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#0A0A0A] text-white border-t border-gray-800">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">GIC Sports</h3>
             <p className="text-gray-300 mb-6 max-w-md">
@@ -75,12 +74,12 @@ const Footer = () => {
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} GIC Sports. All rights reserved.
             </p>
             
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4">
               <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
               <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
               <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
@@ -89,20 +88,20 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-8 p-6 bg-gradient-to-r from-blue-900/10 to-purple-900/10 rounded-lg">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
+        <div className="mt-8 p-4 sm:p-6 bg-gradient-to-r from-blue-900/10 to-purple-900/10 rounded-lg">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
               <h4 className="text-lg font-medium mb-1">Stay up to date with GIC</h4>
-              <p className="text-gray-300 text-sm">Subscribe to our newsletter for the latest updates and opportunities.</p>
+              <p className="text-gray-300 text-sm">Subscribe to our newsletter for updates.</p>
             </div>
             
-            <div className="flex w-full md:w-auto">
+            <div className="flex w-full sm:w-auto">
               <input 
                 type="email" 
                 placeholder="Your email address" 
-                className="flex-1 bg-[#252525] rounded-l-md border-y border-l border-gray-700 p-2 text-sm min-w-[200px]"
+                className="flex-1 bg-[#252525] rounded-l-md border-y border-l border-gray-700 p-2 text-sm min-w-[200px] sm:min-w-[300px]"
               />
-              <Button className="rounded-l-none bg-blue-600 hover:bg-blue-700">
+              <Button className="rounded-l-none bg-blue-600 hover:bg-blue-700 whitespace-nowrap">
                 Subscribe <ArrowRight className="ml-1 w-4 h-4" />
               </Button>
             </div>

@@ -56,7 +56,7 @@ const CompletedDeals = () => {
   ];
 
   return (
-    <section id="deals" className="min-h-screen py-24 bg-gradient-to-b from-[#0A0A0A] to-[#121212]">
+    <section id="deals" className="min-h-screen py-16 sm:py-24 bg-gradient-to-b from-[#0A0A0A] to-[#121212]">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -64,17 +64,16 @@ const CompletedDeals = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           variants={fadeIn}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Completed Deals</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Completed Deals</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto px-4">
             A track record of successful transfers and negotiations across the global football ecosystem.
-            Our expertise and network deliver exceptional results for players and clubs alike.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
           <motion.div
             initial="hidden"
             whileInView="visible"

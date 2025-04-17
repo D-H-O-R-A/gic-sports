@@ -49,17 +49,17 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             GIC Sports
           </div>
           
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-4 lg:space-x-6">
             {sections.map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="text-gray-300 hover:text-white capitalize transition-colors text-sm font-medium"
+                className="text-gray-300 hover:text-white capitalize transition-colors text-sm lg:text-base font-medium whitespace-nowrap"
               >
                 {section.replace('-', ' ')}
               </button>
@@ -73,9 +73,9 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
+              <X className="h-5 w-5 text-white" />
             ) : (
-              <Menu className="h-6 w-6 text-white" />
+              <Menu className="h-5 w-5 text-white" />
             )}
           </Button>
         </div>
@@ -85,13 +85,13 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden py-4 bg-black/95 backdrop-blur-md"
+            className="md:hidden py-2 bg-black/95 backdrop-blur-md rounded-b-lg"
           >
             {sections.map((section) => (
               <button
                 key={section}
                 onClick={() => scrollToSection(section)}
-                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 capitalize transition-colors text-sm font-medium"
+                className="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800/50 capitalize transition-colors text-sm font-medium"
               >
                 {section.replace('-', ' ')}
               </button>

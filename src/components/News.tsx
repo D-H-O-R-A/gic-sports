@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
@@ -60,7 +59,7 @@ const News = () => {
   ];
 
   return (
-    <section id="news" className="min-h-screen py-24 bg-gradient-to-b from-[#121212] to-[#0A0A0A]">
+    <section id="news" className="min-h-screen py-16 sm:py-24 bg-gradient-to-b from-[#121212] to-[#0A0A0A]">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -68,17 +67,16 @@ const News = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           variants={fadeIn}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Latest News</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Latest News</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Stay updated with the latest developments at GIC Sports, from notable transfers
-            and partnerships to advancements in our Web3 initiatives.
+          <p className="text-gray-300 max-w-2xl mx-auto px-4">
+            Stay updated with the latest developments at GIC Sports
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {newsItems.map((item, index) => (
             <motion.div
               key={item.id}
@@ -120,7 +118,7 @@ const News = () => {
           ))}
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           <motion.div
             initial="hidden"
             whileInView="visible"

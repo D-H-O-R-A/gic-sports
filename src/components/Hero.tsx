@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDownCircle, ArrowRight } from 'lucide-react';
@@ -12,9 +11,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
         >
-          <span className="block">Dream It.</span>
+          <span className="block mb-2">Dream It.</span>
           <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
             Do It.
           </span>
@@ -24,7 +23,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto"
+          className="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl mx-auto px-4"
         >
           Unleashing athletic potential through innovative Web3 solutions
         </motion.p>
@@ -33,7 +32,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-12 px-4"
         >
           <Button 
             variant="default" 
