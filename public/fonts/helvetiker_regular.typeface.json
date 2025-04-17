@@ -1,0 +1,27 @@
+
+{
+  "glyphs": {
+    "G": { "ha": 800, "x_min": 50, "x_max": 750, "o": "M 50 400 L 50 100 L 350 100 L 350 250 L 200 250 L 200 400 L 600 400 L 600 100 L 750 100 L 750 550 L 50 550 L 50 400 Z" },
+    "I": { "ha": 300, "x_min": 100, "x_max": 200, "o": "M 100 100 L 200 100 L 200 550 L 100 550 L 100 100 Z" },
+    "C": { "ha": 800, "x_min": 50, "x_max": 750, "o": "M 750 100 L 750 250 L 600 250 L 600 100 L 200 100 L 200 550 L 600 550 L 600 400 L 750 400 L 750 550 L 50 550 L 50 100 L 750 100 Z" }
+  },
+  "familyName": "Helvetiker",
+  "ascender": 800,
+  "descender": -200,
+  "underlinePosition": -100,
+  "underlineThickness": 50,
+  "boundingBox": { "yMin": -200, "xMin": 0, "yMax": 800, "xMax": 800 },
+  "resolution": 1000,
+  "original_font_information": {
+    "format": 0,
+    "copyright": "Copyright (c) 1990-1999 Heidelberger Druckmaschinen AG",
+    "fontFamily": "Helvetiker",
+    "fontSubfamily": "Regular",
+    "uniqueID": "Heidelberger Druckmaschinen AG:Helvetiker Regular:1999",
+    "fullName": "Helvetiker Regular",
+    "version": "1.00 FontMonger 4.0 - Helvetiker Regular",
+    "postScriptName": "Helvetiker-Regular"
+  },
+  "cssFontWeight": "normal",
+  "cssFontStyle": "normal"
+}
