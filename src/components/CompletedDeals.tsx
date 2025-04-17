@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
@@ -22,7 +21,7 @@ const CompletedDeals = () => {
       highlight: "Record fee for a defensive midfielder from Portugal"
     },
     {
-      id: A2,
+      id: 2,
       player: "Jamal Wilson",
       fromClub: "Ajax Amsterdam",
       toClub: "Paris Saint-Germain",
