@@ -6,23 +6,23 @@ import { Button } from './ui/button';
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
-      <div className="container mx-auto px-4 text-center">
+      <div className="container mx-auto px-4 text-center relative z-10">
         <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 1 }}
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-transparent"
         >
           <span className="block mb-2">Dream It.</span>
-          <span className="text-white">
+          <span className="text-transparent">
             Do It.
           </span>
         </motion.h1>
         
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 2 }}
           className="text-white text-lg sm:text-xl mb-12 max-w-2xl mx-auto px-4"
         >
           Unleashing athletic potential through innovative Web3 solutions

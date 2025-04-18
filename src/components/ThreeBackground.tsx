@@ -21,20 +21,21 @@ const ThreeBackground = () => {
     containerRef.current.appendChild(renderer.domElement);
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     
-    const directionalLight = new THREE.DirectionalLight(0x0047AB, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(1, 1, 1);
     scene.add(directionalLight);
 
     // Load font and create 3D text
     const fontLoader = new FontLoader();
     fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
-      const textGeometry = new TextGeometry('GIC', {
+      // Create "GIC" text
+      const gicGeometry = new TextGeometry('GIC', {
         font: font,
-        size: 8,
-        height: 2,
+        size: 5,
+        height: 1,
         curveSegments: 12,
         bevelEnabled: true,
         bevelThickness: 0.1,
@@ -43,26 +44,66 @@ const ThreeBackground = () => {
         bevelSegments: 5
       });
 
+      // Create "Sports" text with smaller size
+      const sportsGeometry = new TextGeometry('Sports', {
+        font: font,
+        size: 2,
+        height: 0.5,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.05,
+        bevelSize: 0.03,
+        bevelOffset: 0,
+        bevelSegments: 5
+      });
+
       const textMaterial = new THREE.MeshPhongMaterial({
-        color: 0x0047AB,
+        color: 0xffffff,
         specular: 0x555555,
         shininess: 30,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.9
       });
 
-      const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-      textGeometry.center();
-      scene.add(textMesh);
+      const gicMesh = new THREE.Mesh(gicGeometry, textMaterial);
+      const sportsMesh = new THREE.Mesh(sportsGeometry, textMaterial);
 
-      // Position camera
-      camera.position.z = 20;
+      // Center both texts
+      gicGeometry.center();
+      sportsGeometry.center();
 
-      // Animation
+      // Position texts
+      gicMesh.position.z = -10;
+      gicMesh.position.y = 2;
+      sportsMesh.position.z = -10;
+      sportsMesh.position.y = -1;
+
+      scene.add(gicMesh);
+      scene.add(sportsMesh);
+
+      // Initial position for animation
+      gicMesh.position.x = -20;
+      sportsMesh.position.x = 20;
+      gicMesh.rotation.y = -Math.PI / 4;
+      sportsMesh.rotation.y = Math.PI / 4;
+
+      // Animate entrance
+      const animateEntrance = () => {
+        gicMesh.position.x += (0 - gicMesh.position.x) * 0.05;
+        sportsMesh.position.x += (0 - sportsMesh.position.x) * 0.05;
+        gicMesh.rotation.y += (0 - gicMesh.rotation.y) * 0.05;
+        sportsMesh.rotation.y += (0 - sportsMesh.rotation.y) * 0.05;
+      };
+
+      // Animation loop
       const animate = () => {
         requestAnimationFrame(animate);
-        textMesh.rotation.y += 0.002;
-        textMesh.rotation.x = Math.sin(Date.now() * 0.0005) * 0.1;
+        animateEntrance();
+        
+        // Subtle floating animation
+        gicMesh.position.y = 2 + Math.sin(Date.now() * 0.001) * 0.1;
+        sportsMesh.position.y = -1 + Math.sin(Date.now() * 0.001 + Math.PI) * 0.1;
+        
         renderer.render(scene, camera);
       };
 
@@ -91,7 +132,8 @@ const ThreeBackground = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-full opacity-10 pointer-events-none z-0"
+      className="fixed top-0 left-0 w-full h-full -z-10"
+      style={{ background: 'linear-gradient(135deg, #1a1f2c 0%, #221F26 100%)' }}
     />
   );
 };
