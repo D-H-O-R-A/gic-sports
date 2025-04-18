@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDownCircle, ArrowRight } from 'lucide-react';
@@ -11,10 +12,10 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 1 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-transparent"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
         >
-          <span className="block mb-2">Dream It.</span>
-          <span className="text-transparent">
+          <span className="block mb-2 text-white">Dream It.</span>
+          <span className="text-white">
             Do It.
           </span>
         </motion.h1>
