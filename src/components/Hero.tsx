@@ -12,12 +12,10 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 1 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white"
         >
-          <span className="block mb-2 text-white">Dream It.</span>
-          <span className="text-white">
-            Do It.
-          </span>
+          <span className="block mb-2">Dream It.</span>
+          <span>Do It.</span>
         </motion.h1>
         
         <motion.p

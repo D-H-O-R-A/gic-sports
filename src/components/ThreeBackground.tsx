@@ -1,7 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 const ThreeBackground = () => {
@@ -13,7 +12,7 @@ const ThreeBackground = () => {
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 20; // Increase camera distance
+    camera.position.z = 25; // Further camera distance for better visibility
     
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
@@ -22,143 +21,127 @@ const ThreeBackground = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    // Lighting for better visibility
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambientLight);
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
     directionalLight.position.set(1, 1, 1);
     scene.add(directionalLight);
 
-    // Add point lights for better text illumination
-    const pointLight1 = new THREE.PointLight(0xffffff, 1);
+    // Add multiple point lights for better illumination
+    const pointLight1 = new THREE.PointLight(0xffffff, 1.5);
     pointLight1.position.set(10, 10, 10);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0xffffff, 1);
+    const pointLight2 = new THREE.PointLight(0xffffff, 1.5);
     pointLight2.position.set(-10, -10, 10);
     scene.add(pointLight2);
 
+    // Text group to animate together
     let textGroup = new THREE.Group();
     scene.add(textGroup);
 
-    // Create a fallback 3D text using basic geometric shapes if font loading fails
+    // Custom geometric shapes as fallback
     const createFallbackText = () => {
-      console.log("Creating fallback 3D text");
+      console.log("Creating fallback 3D text with basic shapes");
       
-      // Clear any existing text
       scene.remove(textGroup);
       textGroup = new THREE.Group();
       
-      // Material for the text
+      // Material with bright color and shininess
       const textMaterial = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        metalness: 0.3,
+        color: 0xf5f5f5,
+        metalness: 0.5,
         roughness: 0.2,
         emissive: 0x222222
       });
       
-      // Create "GIC" with simple geometries
-      const gicGroup = new THREE.Group();
+      // G letter (box)
+      const gBox = new THREE.BoxGeometry(4, 5, 1);
+      const gMesh = new THREE.Mesh(gBox, textMaterial);
+      gMesh.position.set(-8, 3, 0);
       
-      // G letter
-      const gGeometry = new THREE.BoxGeometry(2, 4, 1);
-      const gMesh = new THREE.Mesh(gGeometry, textMaterial);
-      gicGroup.add(gMesh);
+      // I letter (thin box)
+      const iBox = new THREE.BoxGeometry(1, 5, 1);
+      const iMesh = new THREE.Mesh(iBox, textMaterial);
+      iMesh.position.set(-3, 3, 0);
       
-      // I letter
-      const iGeometry = new THREE.BoxGeometry(1, 4, 1);
-      const iMesh = new THREE.Mesh(iGeometry, textMaterial);
-      iMesh.position.x = 3;
-      gicGroup.add(iMesh);
-      
-      // C letter
-      const cGeometry = new THREE.TorusGeometry(2, 0.5, 16, 32, Math.PI);
-      const cMesh = new THREE.Mesh(cGeometry, textMaterial);
-      cMesh.position.x = 6;
+      // C letter (partial torus)
+      const cTorus = new THREE.TorusGeometry(2.5, 1, 16, 32, Math.PI);
+      const cMesh = new THREE.Mesh(cTorus, textMaterial);
+      cMesh.position.set(2, 3, 0);
       cMesh.rotation.y = Math.PI / 2;
-      gicGroup.add(cMesh);
       
-      gicGroup.position.y = 3;
-      gicGroup.position.z = -15;
-      textGroup.add(gicGroup);
+      textGroup.add(gMesh, iMesh, cMesh);
       
-      // Create "SPORTS" with simple boxes
-      const sportsGroup = new THREE.Group();
-      const letters = ['S', 'P', 'O', 'R', 'T', 'S'];
+      // SPORTS text (simplified as boxes)
+      const lettersWidth = 16;
+      const letterSpacing = lettersWidth / 6;
       
-      for (let i = 0; i < letters.length; i++) {
-        const letterGeometry = new THREE.BoxGeometry(1, 2, 1);
-        const letterMesh = new THREE.Mesh(letterGeometry, textMaterial);
-        letterMesh.position.x = i * 2 - 5;
-        sportsGroup.add(letterMesh);
+      for (let i = 0; i < 6; i++) {
+        const letterBox = new THREE.BoxGeometry(1.5, 2.5, 1);
+        const letterMesh = new THREE.Mesh(letterBox, textMaterial);
+        letterMesh.position.set(i * letterSpacing - lettersWidth/2, -4, 0);
+        textGroup.add(letterMesh);
       }
       
-      sportsGroup.position.y = -1;
-      sportsGroup.position.z = -15;
-      textGroup.add(sportsGroup);
-      
-      // Center the whole text group
-      textGroup.position.x = 0;
-      
-      // Initial position for animation
-      textGroup.position.x = -30;
+      // Position group and animate
+      textGroup.position.z = -10;
+      textGroup.position.x = -30; // Start off-screen for animation
       textGroup.rotation.y = -Math.PI / 4;
       
       scene.add(textGroup);
     };
 
-    // Attempt to load font and create text, with fallback
-    let fontLoadingFailed = false;
+    // Load the font and create 3D text
+    console.log("Attempting to load font...");
     const fontLoader = new FontLoader();
+    let fontLoaded = false;
     
-    // Use the available font and create a callback to handle font loading
     fontLoader.load('/fonts/helvetiker_regular.typeface.json', 
-      // onLoad callback
+      // Success callback
       (font) => {
         console.log("Font loaded successfully:", font);
+        fontLoaded = true;
         
         try {
-          // Clear any existing text
           scene.remove(textGroup);
           textGroup = new THREE.Group();
-          
-          // Create "GIC" text with proper geometry
-          const gicGeometry = new THREE.ExtrudeGeometry(
-            font.generateShapes("GIC", 6),
-            {
-              depth: 1.5,
-              bevelEnabled: true,
-              bevelThickness: 0.2,
-              bevelSize: 0.05,
-              bevelSegments: 5
-            }
-          );
 
-          // Create "SPORTS" text with proper geometry
-          const sportsGeometry = new THREE.ExtrudeGeometry(
-            font.generateShapes("SPORTS", 2.5),
-            {
-              depth: 0.8,
-              bevelEnabled: true,
-              bevelThickness: 0.1,
-              bevelSize: 0.03,
-              bevelSegments: 5
-            }
-          );
-          
-          // Use a bright material for visibility
+          // Create materials with bright color for visibility
           const textMaterial = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            metalness: 0.3,
-            roughness: 0.2,
-            emissive: 0x222222
+            color: 0xf5f5f5,
+            metalness: 0.5,
+            roughness: 0.2
+          });
+
+          // Define shapes for "GIC"
+          const gicShapes = font.generateShapes("GIC", 6);
+          // Create "GIC" with extrusion for 3D effect
+          const gicGeometry = new THREE.ExtrudeGeometry(gicShapes, {
+            depth: 2,
+            bevelEnabled: true,
+            bevelThickness: 0.3,
+            bevelSize: 0.2,
+            bevelSegments: 3
+          });
+
+          // Define shapes for "SPORTS"
+          const sportsShapes = font.generateShapes("SPORTS", 3);
+          // Create "SPORTS" with extrusion for 3D effect
+          const sportsGeometry = new THREE.ExtrudeGeometry(sportsShapes, {
+            depth: 1,
+            bevelEnabled: true,
+            bevelThickness: 0.2,
+            bevelSize: 0.1,
+            bevelSegments: 3
           });
 
           const gicMesh = new THREE.Mesh(gicGeometry, textMaterial);
           const sportsMesh = new THREE.Mesh(sportsGeometry, textMaterial);
 
-          // Compute bounding boxes for centering
+          // Center each text segment
           gicGeometry.computeBoundingBox();
           sportsGeometry.computeBoundingBox();
           
@@ -168,48 +151,47 @@ const ThreeBackground = () => {
           const gicWidth = gicBox.max.x - gicBox.min.x;
           const sportsWidth = sportsBox.max.x - sportsBox.min.x;
           
-          // Center both meshes on their geometries
           gicMesh.position.x = -gicWidth / 2;
           sportsMesh.position.x = -sportsWidth / 2;
           
-          // Position the texts vertically
-          gicMesh.position.y = 3;
-          sportsMesh.position.y = -1;
-          gicMesh.position.z = -15;
-          sportsMesh.position.z = -15;
+          // Position the text vertically
+          gicMesh.position.y = 4;  // Move GIC up
+          sportsMesh.position.y = -3; // Move SPORTS down
           
-          // Add to group for easier animation
+          // Move text back in Z for better visibility with hero content
+          gicMesh.position.z = -12;
+          sportsMesh.position.z = -12;
+          
+          // Add to group for animation
           textGroup.add(gicMesh);
           textGroup.add(sportsMesh);
-
-          // Initial position for animation
-          textGroup.position.x = -30;
-          textGroup.rotation.y = -Math.PI / 4;
+          
+          // Initial position for entrance animation
+          textGroup.position.x = -30; // Start off-screen
+          textGroup.rotation.y = -Math.PI / 4; // Start slightly rotated
           
           scene.add(textGroup);
           
           console.log("3D text created successfully");
         } catch (error) {
-          console.error("Error creating 3D text with font:", error);
-          fontLoadingFailed = true;
+          console.error("Error creating 3D text:", error);
           createFallbackText();
         }
-      }, 
-      // onProgress callback
+      },
+      // Progress callback
       (xhr) => {
         console.log(`Font loading: ${(xhr.loaded / xhr.total * 100)}% loaded`);
       },
-      // onError callback
+      // Error callback
       (error) => {
         console.error('Font loading error:', error);
-        fontLoadingFailed = true;
         createFallbackText();
       }
     );
 
-    // Fallback if font doesn't load in a reasonable time
+    // Fallback if font doesn't load within timeout
     const fontLoadingTimeout = setTimeout(() => {
-      if (!textGroup.children.length || fontLoadingFailed) {
+      if (!fontLoaded) {
         console.log("Font loading timed out, using fallback");
         createFallbackText();
       }
@@ -219,14 +201,14 @@ const ThreeBackground = () => {
     const animate = () => {
       requestAnimationFrame(animate);
       
-      // Animate entrance if text exists
       if (textGroup) {
         // Smooth entrance animation
         textGroup.position.x += (0 - textGroup.position.x) * 0.05;
         textGroup.rotation.y += (0 - textGroup.rotation.y) * 0.05;
       
         // Subtle floating animation
-        textGroup.position.y = Math.sin(Date.now() * 0.001) * 0.2;
+        textGroup.position.y = Math.sin(Date.now() * 0.001) * 0.5;
+        textGroup.rotation.z = Math.sin(Date.now() * 0.0005) * 0.03;
       }
       
       renderer.render(scene, camera);
@@ -245,25 +227,31 @@ const ThreeBackground = () => {
 
     window.addEventListener('resize', handleResize);
 
+    // Cleanup function
     return () => {
       clearTimeout(fontLoadingTimeout);
       window.removeEventListener('resize', handleResize);
       
+      // Remove renderer from DOM
       if (containerRef.current && containerRef.current.contains(renderer.domElement)) {
         containerRef.current.removeChild(renderer.domElement);
       }
       
-      // Clean up resources
-      textGroup.children.forEach((child) => {
-        if (child instanceof THREE.Mesh) {
-          child.geometry.dispose();
-          if (child.material instanceof THREE.Material) {
-            child.material.dispose();
-          } else if (Array.isArray(child.material)) {
-            child.material.forEach(material => material.dispose());
+      // Dispose of resources to prevent memory leaks
+      if (textGroup) {
+        textGroup.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach(material => material.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
           }
-        }
-      });
+        });
+      }
       
       scene.clear();
       renderer.dispose();

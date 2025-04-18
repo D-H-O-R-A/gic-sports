@@ -1,14 +1,9 @@
-User-agent: Googlebot
-Allow: /
 
-User-agent: Bingbot
-Allow: /
+# www.robotstxt.org
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Allow all crawlers
 User-agent: *
 Allow: /
+
+# Sitemap location
+Sitemap: https://gicsports.com/sitemap.xml
