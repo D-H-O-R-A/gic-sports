@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,7 +52,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 sm:h-20">
           <div className="text-xl sm:text-2xl font-bold text-white">
-            GIC Sports
+            <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+              GIC Sports
+            </span>
           </div>
           
           <div className="hidden md:flex space-x-4 lg:space-x-6">
@@ -65,18 +69,31 @@ const Navbar = () => {
             ))}
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5 text-white" />
-            ) : (
-              <Menu className="h-5 w-5 text-white" />
-            )}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Link to="/admin">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-white hover:bg-white/10 hidden md:flex items-center gap-1"
+              >
+                <ShieldCheck className="h-4 w-4" />
+                Admin
+              </Button>
+            </Link>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5 text-white" />
+              ) : (
+                <Menu className="h-5 w-5 text-white" />
+              )}
+            </Button>
+          </div>
         </div>
 
         {isMobileMenuOpen && (
@@ -95,6 +112,12 @@ const Navbar = () => {
                 {section.replace('-', ' ')}
               </button>
             ))}
+            <Link to="/admin" className="block w-full">
+              <button className="flex items-center gap-2 w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors text-sm font-medium">
+                <ShieldCheck className="h-4 w-4" />
+                Admin
+              </button>
+            </Link>
           </motion.div>
         )}
       </div>

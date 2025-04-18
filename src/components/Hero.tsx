@@ -14,8 +14,10 @@ const Hero = () => {
           transition={{ duration: 1.5, delay: 1 }}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight text-white"
         >
-          <span className="block mb-2">Dream It.</span>
-          <span>Do It.</span>
+          <span className="block mb-2">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">Dream It.</span>
+          </span>
+          <span className="bg-gradient-to-r from-indigo-400 to-pink-600 bg-clip-text text-transparent">Do It.</span>
         </motion.h1>
         
         <motion.p

@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
 import { Calendar, User, ArrowRight, Newspaper } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const News = () => {
   const fadeIn = {
@@ -69,7 +71,7 @@ const News = () => {
           variants={fadeIn}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Latest News</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">Latest News</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto mb-6"></div>
           <p className="text-gray-300 max-w-2xl mx-auto px-4">
             Stay updated with the latest developments at GIC Sports
@@ -86,34 +88,36 @@ const News = () => {
               transition={{ duration: 0.5, delay: 0.1 * index }}
               variants={fadeIn}
             >
-              <Card className="bg-[#1A1A1A] border-0 shadow-xl overflow-hidden h-full">
-                <div className={`bg-gradient-to-tr ${
-                  item.image === 'business' ? 'from-blue-900/30 to-purple-900/30' :
-                  item.image === 'partnership' ? 'from-teal-900/30 to-blue-900/30' :
-                  'from-purple-900/30 to-pink-900/30'
-                } aspect-video relative`}>
-                  <div className="absolute top-4 left-4 px-2 py-1 bg-blue-500/90 text-white rounded text-xs font-medium">
-                    {item.category}
-                  </div>
-                </div>
-                
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 line-clamp-2">{item.title}</h3>
-                  
-                  <p className="text-gray-300 mb-4 line-clamp-3">{item.excerpt}</p>
-                  
-                  <div className="flex items-center text-sm text-gray-400 mb-4">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span className="mr-4">{item.date}</span>
-                    <User className="w-4 h-4 mr-1" />
-                    <span>{item.author}</span>
+              <Link to={`/news/${item.id}`}>
+                <Card className="bg-[#1A1A1A] border-0 shadow-xl overflow-hidden h-full hover:shadow-2xl hover:transform hover:scale-[1.02] transition-all duration-300">
+                  <div className={`bg-gradient-to-tr ${
+                    item.image === 'business' ? 'from-blue-900/30 to-purple-900/30' :
+                    item.image === 'partnership' ? 'from-teal-900/30 to-blue-900/30' :
+                    'from-purple-900/30 to-pink-900/30'
+                  } aspect-video relative`}>
+                    <div className="absolute top-4 left-4 px-2 py-1 bg-blue-500/90 text-white rounded text-xs font-medium">
+                      {item.category}
+                    </div>
                   </div>
                   
-                  <Button variant="link" className="px-0 text-blue-400">
-                    Read more <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold mb-3 line-clamp-2 text-white">{item.title}</h3>
+                    
+                    <p className="text-gray-300 mb-4 line-clamp-3">{item.excerpt}</p>
+                    
+                    <div className="flex items-center text-sm text-gray-400 mb-4">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      <span className="mr-4">{item.date}</span>
+                      <User className="w-4 h-4 mr-1" />
+                      <span>{item.author}</span>
+                    </div>
+                    
+                    <Button variant="link" className="px-0 text-blue-400">
+                      Read more <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -131,10 +135,10 @@ const News = () => {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-6">
                   <Newspaper className="text-purple-400 w-5 h-5" />
-                  <h3 className="text-xl font-semibold">Featured Interview</h3>
+                  <h3 className="text-xl font-semibold text-white">Featured Interview</h3>
                 </div>
                 
-                <h4 className="text-2xl font-bold mb-4">
+                <h4 className="text-2xl font-bold mb-4 text-white">
                   "The Future of Sports Management is Decentralized"
                 </h4>
                 
@@ -172,7 +176,7 @@ const News = () => {
           >
             <Card className="bg-[#1A1A1A] border-0 shadow-xl overflow-hidden h-full">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-6">Press Releases</h3>
+                <h3 className="text-xl font-semibold mb-6 text-white">Press Releases</h3>
                 
                 <div className="space-y-4">
                   {pressReleases.map((release) => (
@@ -181,7 +185,7 @@ const News = () => {
                         <Calendar className="w-4 h-4 text-gray-400 mt-1 mr-2" />
                         <div>
                           <span className="block text-sm text-gray-400">{release.date}</span>
-                          <h4 className="font-medium mt-1">{release.title}</h4>
+                          <h4 className="font-medium mt-1 text-white">{release.title}</h4>
                         </div>
                       </div>
                     </div>
@@ -197,7 +201,7 @@ const News = () => {
             </Card>
             
             <div className="mt-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-6">
-              <h4 className="font-medium mb-2">Subscribe to Our Newsletter</h4>
+              <h4 className="font-medium mb-2 text-white">Subscribe to Our Newsletter</h4>
               <p className="text-gray-300 text-sm mb-4">
                 Stay informed with our latest news, events, and updates delivered directly to your inbox.
               </p>
